@@ -16,7 +16,7 @@ password = '5133pD@T@5133p'
 #test.logfile = fout
 timeoutItterator = 0
 
-while timeoutItterator <= 3:
+while timeoutItterator < 3:
   try: 
     test = pexpect.spawn('ssh '+wlc)
     fout = open('wlc' + wlc + '.txt', 'wb')
@@ -50,7 +50,10 @@ while timeoutItterator <= 3:
   except (pexpect.TIMEOUT or pexpect.EOF):
     test.close()
     timeoutItterator+=1
-    print 'Timeout Error2'
+    print timeoutItterator
+    #print 'Timeout Error2'
+if (timeoutItterator == 3)
+  print "Generate Nagios Alert"
 
 #Logging
 #test.logfile = sys.stdout
