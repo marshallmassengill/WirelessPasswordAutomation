@@ -1,41 +1,0 @@
-
-*************************** WARNING ******************************
-This system is the property of Teleflex Inc and/or its affiliates.
-Its use and access are intended solely for authorized individuals
-of the company. By using this system, all users acknowledge notice
-of, and agree to comply with all Teleflex Global IT Policies.
-Use of this system may be logged or recorded. Unauthorized or
-improper use of this system is strictly prohibited and may be
-subject to disciplinary action or civil/criminal prosecution.
-
-Do not continue if you do not agree to the conditions stated in
-this warning. For assistance, contact Teleflex Global Service Desk.
-*******************************************************************
-(Cisco Controller) 
-User: tfxscript
-tfxscript
-Password:5133pD@T@5133p
-**************
-(Cisco Controller) >config wlan disable 2
-config wlan disable 2
-
-
-(Cisco Controller) >config wlan security wpa akm psk set-key ascii QamW8nCtgdkN 2
-config wlan security wpa akm psk set-key ascii QamW8nCtgdkN 2
-
-
-(Cisco Controller) >config wlan enable 2
-config wlan enable 2
-
-
-(Cisco Controller) >save config
-save config
-
-Are you sure you want to save? (y/n) y
-y
-
-
-Configuration Saved!
-
-(Cisco Controller) >
-(Cisco Controller) >logout

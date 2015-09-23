@@ -16,6 +16,7 @@ import pexpect
 wlcFile = 'wlc_list.txt'
 aapFile = 'aap_list.txt'
 logdir = "./logs/"
+alertScript = "./alert.sh"
 passwordFile = 'current.shtml'
 password = ''
 timeoutIterator = 0
@@ -131,31 +132,48 @@ def aapConfig(aapName):
 def sendNotification(status, message):
   #Status should be OK, WARN, or CRIT
   if status == "OK":
+    #Send OK to syslog
     syslog.syslog(syslog.LOG_NOTICE, message)
   elif status == "WARN":
+    #Send WARN to syslog
     syslog.syslog(syslog.LOG_WARNING, message)
-  elif status == "CRIT":  
+  elif status == "CRIT":
+    #Send CRIT to syslog  
     syslog.syslog(syslog.LOG_CRIT, message)
   else:
-    message = "Script Error"
+    #Throw an error message and write to syslog
+    message = "Script Error in sendNotification"
     syslog.syslog(syslog.LOG_CRIT, message)
-  rc = subprocess.call(["./alert.sh",status,"'" + message + "'"])
+  #Set the return code to the output of the alert script
+  rc = subprocess.call([alertScript,status,"'" + message + "'"])
   return rc
-# LOG_EMERG, LOG_ALERT, LOG_CRIT, LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO, LOG_DEBUG
 
 #Device Configuration function
 def deviceConfig(device):
+  #Set the timeout value
   timeoutIterator = 0
+  #Iterate while less than 3 tries
   while timeoutIterator < 3:
+    #Run the configuration of the device
     out = wlcConfig(device)
+    #If the device configuration was successful
     if out == True:
+      #Send the notification that everything went well
       sendNotification("OK", "Everything went well for " + device)
+      #Break the while loop
       break
+    #If the device configuration failed
     elif out == False:
+      #Iterate the iterator
       timeoutIterator+=1
+      #Send the notification that something failed
       sendNotification("WARN", "The request timed out for device: " + device)
+      #Sleep for 10 seconds
+      time.sleep(10)
+    #Something has gone horribly wrong
     else:
       sendNotification("CRIT", "Script Error on deivce: " + device)
+  #Send a Critical error if it fails 3 times
   if (timeoutIterator == 3):
     sendNotification("CRIT", "The request timed out 3 times for deivce: " + device)
   return True
