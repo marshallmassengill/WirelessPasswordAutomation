@@ -1,0 +1,11 @@
+# Compiled source #
+###################
+*.pyc
+
+# Passwords #
+###################
+cliPass.txt
+
+# Logs #
+###################
+logs\*
