@@ -1,17 +1,0 @@
-
-*************************** WARNING ******************************
-This system is the property of Teleflex Inc and/or its affiliates.
-Its use and access are intended solely for authorized individuals
-of the company. By using this system, all users acknowledge notice
-of, and agree to comply with all Teleflex Global IT Policies.
-Use of this system may be logged or recorded. Unauthorized or
-improper use of this system is strictly prohibited and may be
-subject to disciplinary action or civil/criminal prosecution.
-
-Do not continue if you do not agree to the conditions stated in
-this warning. For assistance, contact Teleflex Global Service Desk.
-*******************************************************************
-(Cisco Controller) 
-User: tfxscript
-tfxscript
-Password:
